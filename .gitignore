@@ -1,0 +1,34 @@
+# Virtual environment
+# Large folder, specific to your machine, no one else needs it
+venv/
+
+# Python automatically creates these when it runs your code
+# They're compiled cache files, not actual code
+__pycache__/
+*.pyc
+*.pyo
+
+# MLflow creates this folder when you run experiments
+# Gets large quickly, not needed on GitHub
+mlruns/
+
+# Data files
+# DVC tracks these - Git doesn't need to
+data/
+
+# Trained model files
+# DVC tracks these too
+models/
+
+# VS Code personal settings - other people don't need yours
+.vscode/
+
+# Windows automatically creates this in folders - irrelevant
+Thumbs.db
+
+# This file will hold secret keys like AWS passwords
+# NEVER put this on GitHub - anyone could steal your credentials
+.env
+
+# DVC internal cache
+.dvc/cache
