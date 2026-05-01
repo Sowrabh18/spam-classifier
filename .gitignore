@@ -14,7 +14,11 @@ mlruns/
 
 # Data files
 # DVC tracks these - Git doesn't need to
-data/
+# Ignore actual data files
+data/**
+# But DO track DVC fingerprint files
+!data/**/*.dvc
+!data/**/
 
 # Trained model files
 # DVC tracks these too
