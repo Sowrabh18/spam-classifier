@@ -36,3 +36,7 @@ Thumbs.db
 
 # DVC internal cache
 .dvc/cache
+
+# Jupyter checkpoint files - auto generated, not needed
+.ipynb_checkpoints/
+*.ipynb_checkpoints
