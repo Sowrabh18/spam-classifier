@@ -1,0 +1,5 @@
+outs:
+- md5: 2016df642623962b5f7f176e240249f8
+  size: 295313
+  hash: md5
+  path: spam_cleaned.csv
