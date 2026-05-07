@@ -113,10 +113,13 @@ def preprocess():
     # model look better than it actually is
     print("\n[5/7] Removing duplicates...")
     before = len(df)
-    df = df.drop_duplicates()
+# Drop rows where text is empty after cleaning
+# Empty cells become NaN (float) which breaks TF-IDF
+
+    df = df.dropna(subset=['text'])
+    df = df[df['text'].str.strip() != '']
     after = len(df)
-    print(f"      Removed {before - after} duplicate rows")
-    print(f"      Remaining: {after} rows")
+    print(f"      Removed {before - after} empty text rows")
 
     # ── Step 6: Add length feature ──────────────────────
     # From EDA: spam messages are consistently longer
