@@ -1,0 +1,80 @@
+# ─────────────────────────────────────────────────────
+# docker-compose.yml
+#
+# Runs two services together:
+# 1. fastapi  - the spam classifier prediction API
+# 2. mlflow   - the experiment tracking server
+#
+# Run everything with: docker compose up
+# Stop everything with: docker compose down
+# ─────────────────────────────────────────────────────
+
+version: '3.8'
+
+services:
+
+  # ── FastAPI service ───────────────────────────────────
+  fastapi:
+    # build: . means build the image using the
+    # Dockerfile in the current directory
+    build: .
+
+    # Container name makes it easy to identify
+    container_name: spam-classifier-api
+
+    # Port mapping: host:container
+    # Left side is your laptop/server port
+    # Right side is the container's internal port
+    # So http://localhost:8000 on your machine
+    # talks to port 8000 inside the container
+    ports:
+      - "8000:8000"
+
+    # Volumes mount folders from your machine
+    # into the container at runtime
+    # Left side is path on your machine
+    # Right side is path inside the container
+    # This means the container can access your
+    # trained model file without it being
+    # baked into the image itself
+    volumes:
+      - ./models:/app/models
+
+    # Environment variables passed into the container
+    environment:
+      - PYTHONUNBUFFERED=1
+
+    # depends_on means fastapi waits for mlflow
+    # to start before starting itself
+    depends_on:
+      - mlflow
+
+    # restart: unless-stopped means if the container
+    # crashes it automatically restarts
+    # unless you explicitly stop it yourself
+    restart: unless-stopped
+
+  # ── MLflow service ────────────────────────────────────
+  mlflow:
+    # Use the same base Python image
+    image: python:3.10-slim
+
+    container_name: spam-classifier-mlflow
+
+    ports:
+      - "5000:5000"
+
+    # Mount mlruns folder so experiment data
+    # persists even if container restarts
+    volumes:
+      - ./mlruns:/mlruns
+
+    # Install mlflow and start the server
+    command: >
+      bash -c "pip install mlflow &&
+               mlflow server
+               --host 0.0.0.0
+               --port 5000
+               --backend-store-uri /mlruns"
+
+    restart: unless-stopped

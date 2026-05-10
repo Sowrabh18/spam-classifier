@@ -1,0 +1,28 @@
+# Virtual environment
+# Container has its own Python environment
+venv/
+
+# Git history - not needed inside container
+.git/
+
+# DVC cache - not needed inside container
+.dvc/cache
+
+# MLflow runs - not needed inside container
+mlruns/
+
+# Raw data - not needed inside container
+data/raw/
+
+# Jupyter notebooks - not needed inside container
+notebooks/
+
+# Python cache files
+__pycache__/
+*.pyc
+
+# VS Code settings
+.vscode/
+
+# Environment variables
+.env
