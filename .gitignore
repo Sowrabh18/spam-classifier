@@ -40,3 +40,6 @@ Thumbs.db
 # Jupyter checkpoint files - auto generated, not needed
 .ipynb_checkpoints/
 *.ipynb_checkpoints
+
+# AWS key file - never commit this
+*.pem
