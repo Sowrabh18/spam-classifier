@@ -22,7 +22,7 @@ data/**
 
 # Trained model files
 # DVC tracks these too
-models/
+#models/
 
 # VS Code personal settings - other people don't need yours
 .vscode/
