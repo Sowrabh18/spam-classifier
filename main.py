@@ -1,9 +1,11 @@
 # ─────────────────────────────────────────────────────
+# Deployed via CI/CD pipeline
 # main.py
 #
 # FastAPI application.
 # Exposes the spam classifier as a REST API.
 # Run with: uvicorn main:app --reload
+
 # ─────────────────────────────────────────────────────
 
 from fastapi import FastAPI, HTTPException
